@@ -29,6 +29,9 @@ int *random_array(int n) {
 }
 
 void time_to_file(char *filename, long (*f)(int[], int)){
+    printf("test1\n");
+    printf("Creating %s.csv file\n", filename);
+    printf("test2\n");
     FILE *fp;
     filename = strcat(filename, ".csv");
     fp = fopen(filename, "w");
@@ -51,5 +54,6 @@ void time_to_file(char *filename, long (*f)(int[], int)){
 }
 
 void main() {
-    time_to_file("bubble_sort", bubble_sort);
+    char filename[] = "bubble_sort";
+    time_to_file(filename, bubble_sort);
 }
