@@ -29,9 +29,6 @@ int *random_array(int n) {
 }
 
 void time_to_file(char *filename, long (*f)(int[], int)){
-    printf("test1\n");
-    printf("Creating %s.csv file\n", filename);
-    printf("test2\n");
     FILE *fp;
     filename = strcat(filename, ".csv");
     fp = fopen(filename, "w");
