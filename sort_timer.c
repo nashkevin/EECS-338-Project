@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 int is_sorted (int *a, int n) {
     int i;
@@ -25,24 +26,28 @@ int *random_array(int n) {
     return ret;
 }
 
-void main() {
-    char *filename = "bubble_sort.csv"
+void time_to_file(char *filename, void (*f)(int, int)){
     FILE *fp;
-    fp=fopen(filename,"w");
-    fprintf(fp,"N, Time(ns)");
+    filename = strcat(filename, ".csv");
+    fp = fopen(filename, "w");
+    fprintf(fp, "N, Time(ns)");
 
     int i, n;
     for (n = 10; n < 10000; n++){
-        int *array = random_array(n)
+        int *array = random_array(n);
 
         if (array) {
-            int t = bubble_sort(array, n);
+            long t = (*f)(array, n);
 
-            if (is_sorted(array)) {
+            if (is_sorted(array, n)) {
                 fprintf(fp,"\n%d,%d", n, t);
             }
 
             free(array);
         }
-    }
+    } 
+}
+
+void main() {
+    time_to_file("bubble_sort", bubble_sort);
 }
