@@ -58,6 +58,32 @@ int *random_array(int n) {
     return ret;
 }
 
+int real_main(){
+    char *filename = "bubble_sort.csv"
+    FILE *fp;
+    fp=fopen(filename,"w");
+    fprintf(fp,"N, Time(ns)");
+
+
+    time_t begin, end;
+    int i, n;
+    for (n = 10; n < 10000; n++){
+        int *array = random_array(n)
+
+        if (array) {
+            begin = clock();
+            bubble_sort(array, n);
+            end = clock();
+
+            if (is_sorted(array)) {
+                fprintf(fp,"\n%d,%d", n, ((end - begin)) * 1000 * 1000 / CLOCKS_PER_SEC));
+            }
+
+            free(array);
+        }
+    }
+}
+
 int main () {
     time_t begin, end;
     int *a = random_array(30);
