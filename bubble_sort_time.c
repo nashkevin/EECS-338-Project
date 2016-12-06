@@ -56,9 +56,9 @@ int main () {
     for (i = 0; i < n; i++)
         printf("%d%s", b[i], i == n - 1 ? "\n" : " ");
 
-    begin = clock(); //starts clock once again
+    begin = clock(); //starts clock
     threaded_bubble_sort(b, n); //runs threaded bubble sort
-    end = clock(); //stops clock once again
+    end = clock(); //stops clock
 
     for (i = 0; i < n; i++)
         printf("%d%s", b[i], i == n - 1 ? "\n" : " ");
