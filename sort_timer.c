@@ -16,7 +16,7 @@ int is_sorted (int *a, int n) {
 }
 
 int *random_array(int n) {
-    int *ret = malloc(n);
+    int *ret = malloc(n * sizeof(int));
     if(!ret)
         return NULL;
 
@@ -51,6 +51,8 @@ void time_to_file(char *filename, long (*f)(int[], int)){
             free(array);
         }
     } 
+
+    fclose(fp);
 }
 
 void main() {
