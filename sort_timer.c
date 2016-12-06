@@ -3,6 +3,8 @@
 #include <time.h>
 #include <string.h>
 
+#include "sorting_algorithms.h"
+
 int is_sorted (int *a, int n) {
     int i;
     for (i = 1; i < n; i++) {

@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <omp.h>  
+#include <omp.h>
+
+#include "sorting_algorithms.h"
 
 /** Sorts an input array using bubble sort
  *  Returns the time taken to sort the array */
