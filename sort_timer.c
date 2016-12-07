@@ -35,7 +35,7 @@ void time_to_file(char *filename, long (*f)(int[], int)){
     fprintf(fp, "N, Time(ns)");
 
     int i, n;
-    for (n = 10; n < 10000; n++){
+    for (n = 10; n < 100; n++){
         int *array = random_array(n);
 
         if (array) {
@@ -53,6 +53,8 @@ void time_to_file(char *filename, long (*f)(int[], int)){
 }
 
 void main() {
-    char filename[] = "bubble_sort";
-    time_to_file(filename, bubble_sort);
+    char bubble_sort_filename[] = "bubble_sort";
+    time_to_file(bubble_sort_filename, bubble_sort);
+    char bubble_sort_parallel_filename[] = "bubble_sort_parallel";
+    time_to_file(bubble_sort_parallel_filename, bubble_sort_parallel);
 }
