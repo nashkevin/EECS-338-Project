@@ -35,7 +35,7 @@ void time_to_file(char *filename, long (*f)(int[], int)){
     fprintf(fp, "N, Time(ns)");
 
     int i, n;
-    for (n = 10; n < 100; n++){
+    for (n = 1; n < 10000; n += 100){
         int *array = random_array(n);
 
         if (array) {
