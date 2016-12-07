@@ -1,0 +1,32 @@
+Joel Kalos, Kevin Nash
+
+[FP Beta Design Document]
+    
+    Note:
+        This document describes our ideal design for the final result of this
+        project. We may not implement every sorting algorithm included here.
+
+    The only major data structures that we are using are the randomly-populated
+    int arrays that our algorithms are sorting.
+
+    We are creating an individual C file for each of the sorting algorithms
+    that we intend to implement. A runner file called sort_timer.c will run
+    parallel and non-parallel versions of each sorting algorithm. Every sort
+    method returns its runtime and sorts the array in memory, rather than
+    returning a sorted array. These runtimes are written to CSV files. There is
+    a uniquely named output file for each type of sort.
+
+    We also intend to plot these values in an aesthetically pleasing way, using
+    a custom made Python script or, time not permitting, using MS Excel.
+
+    The single-threaded and multi-threaded versions of bubble sort are both
+    implemented in bubble_sort.c and they work as expected (multi-threading
+    is faster).
+
+    Sample output can be found in bubble_sort.csv and bubble_sort_parallel.csv.
+
+    In the future we also plan to include:
+        quicksort.c
+        mergesort.c
+        insertion_sort.c
+        selection_sort.c
