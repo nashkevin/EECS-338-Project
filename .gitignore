@@ -1,3 +1,6 @@
+# CSV Output
+*.csv
+
 # Object files
 *.o
 *.ko
