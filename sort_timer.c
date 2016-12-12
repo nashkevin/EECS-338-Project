@@ -17,13 +17,16 @@ int is_sorted (int *a, int n) {
 
 int *random_array(int n) {
     int *ret = malloc(n * sizeof(int));
-    if(!ret)
+    if (!ret) {
         return NULL;
+    }
 
     srand(time(NULL));
 
-    for(int i = 0; i < n; ++i) 
+    int i;
+    for(i = 0; i < n; ++i) {
         ret[i] = rand() % n;
+    }
 
     return ret;
 }
@@ -52,9 +55,11 @@ void time_to_file(char *filename, long (*f)(int[], int)){
     fclose(fp);
 }
 
-void main() {
+int main(void) {
     char bubble_sort_filename[] = "bubble_sort";
     time_to_file(bubble_sort_filename, bubble_sort);
     char bubble_sort_parallel_filename[] = "bubble_sort_parallel";
     time_to_file(bubble_sort_parallel_filename, bubble_sort_parallel);
+
+    return 0;
 }
