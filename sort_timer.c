@@ -60,6 +60,10 @@ int main(void) {
     time_to_file(bubble_sort_filename, bubble_sort);
     char bubble_sort_parallel_filename[] = "bubble_sort_parallel";
     time_to_file(bubble_sort_parallel_filename, bubble_sort_parallel);
+    char insertion_sort_filename[] = "insertion_sort";
+    time_to_file(insertion_sort_filename, insertion_sort);
+    char insertion_sort_parallel_filename[] = "insertion_sort_parallel";
+    time_to_file(insertion_sort_parallel_filename, insertion_sort_parallel);
 
     return 0;
 }
