@@ -64,6 +64,9 @@ int main(void) {
     time_to_file(insertion_sort_filename, insertion_sort);
     char insertion_sort_parallel_filename[] = "insertion_sort_parallel";
     time_to_file(insertion_sort_parallel_filename, insertion_sort_parallel);
-
+    char merge_sort_filename[] = "merge_sort";
+    time_to_file(merge_sort_filename, merge_sort);
+    char quicksort_filename[] = "quicksort";
+    time_to_file(quicksort_filename, quicksort);
     return 0;
 }
