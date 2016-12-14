@@ -69,15 +69,15 @@ void time_to_file(char *filename, uint64_t (*f_regular)(int[], int), uint64_t (*
 }
 
 int main(void) {
-    char bubble_sort_filename[] = "bubble_sort";
-    time_to_file(bubble_sort_filename, bubble_sort, bubble_sort_parallel);
+    // char bubble_sort_filename[] = "bubble_sort";
+    // time_to_file(bubble_sort_filename, bubble_sort, bubble_sort_parallel);
     char insertion_sort_filename[] = "insertion_sort";
     time_to_file(insertion_sort_filename, insertion_sort, insertion_sort_parallel);
-    char merge_sort_filename[] = "merge_sort";
-    time_to_file(merge_sort_filename, merge_sort, merge_sort_parallel);
-    char selection_sort_filename[] = "selection_sort";
-    time_to_file(selection_sort_filename, selection_sort, selection_sort_parallel);
-    char quicksort_filename[] = "quicksort";
-    time_to_file(quicksort_filename, quicksort, quicksort_parallel);
+    // char merge_sort_filename[] = "merge_sort";
+    // time_to_file(merge_sort_filename, merge_sort, merge_sort_parallel);
+    // char selection_sort_filename[] = "selection_sort";
+    // time_to_file(selection_sort_filename, selection_sort, selection_sort_parallel);
+    // char quicksort_filename[] = "quicksort";
+    // time_to_file(quicksort_filename, quicksort, quicksort_parallel);
     return 0;
 }

@@ -1,12 +1,15 @@
+#include <omp.h>
+#include <pthread.h>
+#include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <omp.h>
-#include <semaphore.h>
 
 #include "sorting_algorithms.h"
 
 #define BILLION 1000000000L
+
+sem_t mutex;
 
 /** Sorts an input array using insertion sort
  *  Returns the time taken to sort the array */
@@ -48,23 +51,23 @@ void *insertion_sort_thread(void *arguments){
     int *a = args -> a;
     int n = args -> n;
     struct node *x = args -> x;
-    struct node iterator = x;
-    struct node new_val = malloc(sizeof(struct node))
+    struct node *iterator = x;
+    struct node *new_val = malloc(sizeof(struct node));
 
     int i;
     for (i = 0; i < n; i++) {
-        new_val.val = a[i];
-        new_val.next = NULL;
+        new_val->val = a[i];
+        new_val->next = NULL;
         sem_wait(&mutex);
 
         while(iterator -> next != NULL && iterator -> next -> val < a[i])
             iterator = iterator -> next;
 
         if (iterator -> next == NULL) {
-            iterator.next = new_val;
+            iterator->next = new_val;
         } else {
-            new_val.next = iterator -> next;
-            iterator.next = new_val;
+            new_val->next = iterator -> next;
+            iterator->next = new_val;
         }
 
         sem_post(&mutex);
@@ -77,7 +80,6 @@ void *insertion_sort_thread(void *arguments){
 uint64_t insertion_sort_parallel (int *a, int n) {
     pthread_t tid1, tid2;
     struct arg_struct args1, args2;
-    sem_t mutex;
     struct node *x = malloc(sizeof(struct node));
 
     if(sem_init(&mutex, 0, 1) < 0) {
@@ -88,10 +90,11 @@ uint64_t insertion_sort_parallel (int *a, int n) {
     struct timespec start, end;
     clock_gettime(CLOCK_MONOTONIC, &start);
 
-    x.val = a[0]
+    x->val = a[0];
 
-    if (n < 2)
+    if (n < 2) {
         return 0;
+    }
     int m = n / 2;
 
     args1.a = a + 1;
@@ -112,13 +115,15 @@ uint64_t insertion_sort_parallel (int *a, int n) {
     pthread_join(tid1,NULL);
     pthread_join(tid2,NULL);
 
-    struct node iterator = x;
-    struct node temp;
+    struct node *iterator = x;
+    struct node *temp;
+    int i = 0;
     while(iterator -> next != NULL){
         a[i] = iterator -> val;
         temp = iterator;
         iterator = iterator -> next;
         free(temp);
+        i++;
     }
     free(x);
 
