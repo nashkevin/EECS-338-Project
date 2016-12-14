@@ -8,7 +8,7 @@
 #define BILLION 1000000000L
 
 int main(void) {
-  time_t start, end;
+  struct timespec start, end;
   uint64_t diff;
   clock_gettime(CLOCK_MONOTONIC, &start);
 
@@ -19,6 +19,6 @@ int main(void) {
 
   clock_gettime(CLOCK_MONOTONIC, &end);
   diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
-  printf("%d\n", diff);
+  printf("%llu\n", diff);
   return 0;
 }
