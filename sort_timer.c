@@ -31,20 +31,18 @@ int *random_array(int n) {
     return ret;
 }
 
-void time_to_file(char *filename, uint64_t (*f_regular)(int[], int), uint64_t (*f_parallel)(int[], int)){
+void time_to_file(char *filename, uint64_t (*f_regular)(int[], int)){
     FILE *fp;
     filename = strcat(filename, ".csv");
     fp = fopen(filename, "w");
-    fprintf(fp, "N, Regular Sort, Parallel Sort");
+    fprintf(fp, "N, Time(ns)");
 
     int i, n;
     for (n = 1; n < 100000; n += 1000) {
         int *array1 = random_array(n);
-        int *array2 = random_array(n);
 
-        if (array1 && array2) {
+        if (array1) {
             uint64_t t_regular = (*f_regular)(array1, n);
-            uint64_t t_parallel = (*f_parallel)(array2, n);
 
             fprintf(fp, "\n%d", n);
 
@@ -54,14 +52,7 @@ void time_to_file(char *filename, uint64_t (*f_regular)(int[], int), uint64_t (*
                 fprintf(fp,", NOTSORTED");
             }
 
-            if (is_sorted(array2, n)) {
-                fprintf(fp,",%llu", t_parallel);
-            } else {
-                fprintf(fp,", NOTSORTED");
-            }
-
             free(array1);
-            free(array2);
         }
     }
 
