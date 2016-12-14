@@ -79,7 +79,7 @@ uint64_t merge_sort_parallel (int *a, int n) {
     }
     args2.a = a + m;
     args2.n = n - m;
-    if (pthread_create(&tid2, NULL, &merge_sort_thread, (void *)&args1) != 0) {
+    if (pthread_create(&tid2, NULL, &merge_sort_thread, (void *)&args2) != 0) {
         printf("Uh-oh!\n");
         return -1;
     }
