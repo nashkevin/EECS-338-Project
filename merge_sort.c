@@ -1,3 +1,4 @@
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -44,8 +45,8 @@ struct arg_struct {
 
 void *merge_sort_thread(void *arguments) {
     struct arg_struct *args = arguments;
-    int a = args -> a
-    int n = args -> n
+    int *a = args -> a;
+    int n = args -> n;
 
     if (n < 2)
         return 0;
@@ -62,7 +63,6 @@ uint64_t merge_sort_parallel (int *a, int n) {
     pthread_t tid1, tid2;
     struct arg_struct args1, args2;
 
-    return pthread_join(tid, NULL);
     struct timespec start, end;
     clock_gettime(CLOCK_MONOTONIC, &start);
 
