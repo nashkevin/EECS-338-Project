@@ -46,7 +46,9 @@ void time_to_file(char *filename, uint64_t (*f)(int[], int)){
 
             if (is_sorted(array, n)) {
                 fprintf(fp,"\n%d,%llu", n, t);
-            }
+            } else {
+
+            }fprintf(fp,"\n%d,NOTSORTED", n);
 
             free(array);
         }
