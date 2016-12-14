@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -5,11 +6,14 @@
 
 #include "sorting_algorithms.h"
 
+#define BILLION 1000000000L
+
 /** Sorts an input array using bubble sort
  *  Returns the time taken to sort the array */
-long bubble_sort (int *a, int n) {
-    time_t startTime, endTime;
-    startTime = clock();
+uint64_t bubble_sort (int *a, int n) {
+    struct timespec start, end;
+    uint64_t diff;
+    clock_gettime(CLOCK_MONOTONIC, &start);
 
     int i, t, s = 1;
     while (s) {
@@ -24,16 +28,19 @@ long bubble_sort (int *a, int n) {
         }
     }
 
-    endTime = clock();
-    return (long)((endTime - startTime) * 1000 * 1000 / CLOCKS_PER_SEC);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+
+    return diff;
 }
 
 /** Sorts an input array using bubble sort and parallel processing
  *  Returns the time taken to sort the array */
-long bubble_sort_parallel (int *a, int n) {
-    time_t startTime, endTime;
+uint64_t bubble_sort_parallel (int *a, int n) {
+    struct timespec start, end;
+    uint64_t diff;
+    clock_gettime(CLOCK_MONOTONIC, &start);
 
-    startTime = clock();
     int i, t, s = 1;
     while (s) {
         s = 0;
@@ -49,6 +56,8 @@ long bubble_sort_parallel (int *a, int n) {
         }
     }
 
-    endTime = clock();
-    return (long)((endTime - startTime) * 1000 * 1000 / CLOCKS_PER_SEC);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+
+    return diff;
 }

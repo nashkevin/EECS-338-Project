@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -5,11 +6,14 @@
 
 #include "sorting_algorithms.h"
 
+#define BILLION 1000000000L
+
 /** Sorts an input array using insertion sort
  *  Returns the time taken to sort the array */
-long insertion_sort (int *a, int n) {
-    time_t startTime, endTime;
-    startTime = clock();
+uint64_t insertion_sort (int *a, int n) {
+    struct timespec start, end;
+    uint64_t diff;
+    clock_gettime(CLOCK_MONOTONIC, &start);
 
     size_t i, j;
     for (i = 1; i < n; ++i) {
@@ -22,16 +26,18 @@ long insertion_sort (int *a, int n) {
         a[j] = tmp;
     }
 
-    endTime = clock();
-    return (long)((endTime - startTime) * 1000 * 1000 / CLOCKS_PER_SEC);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+
+    return diff;
 }
 
 /** Sorts an input array using insertion sort and parallel processing
  *  Returns the time taken to sort the array */
-long insertion_sort_parallel (int *a, int n) {
-    time_t startTime, endTime;
-
-    startTime = clock();
+uint64_t insertion_sort_parallel (int *a, int n) {
+    struct timespec start, end;
+    uint64_t diff;
+    clock_gettime(CLOCK_MONOTONIC, &start);
     
     size_t i, j;
     #pragma omp parallel for
@@ -46,6 +52,8 @@ long insertion_sort_parallel (int *a, int n) {
         a[j] = tmp;
     }
 
-    endTime = clock();
-    return (long)((endTime - startTime) * 1000 * 1000 / CLOCKS_PER_SEC);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+
+    return diff;
 }
