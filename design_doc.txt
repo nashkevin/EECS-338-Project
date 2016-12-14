@@ -1,10 +1,23 @@
-Joel Kalos, Kevin Nash
 
-[FP Beta Design Document]
+[ FP Final Design Document ]
+    Joel Kalos, Kevin Nash
+    December 13, 2016
     
-    Note:
-        This document describes our ideal design for the final result of this
-        project. We may not implement every sorting algorithm included here.
+File Descriptions:
+    bubble_sort.c
+        Bubble sort algorithm in a single thread or parallel
+    insertion_sort.c
+        Insertion sort algorithm in a single thread or parallel
+    merge_sort.c
+        Mergesort algorithm in a single thread or parallel
+    quicksort.c
+        Quicksort algorithm in a single thread or parallel
+    selection_sort.c
+        Selection sort algorithm in a single thread or parallel
+    sorting_algorithms.h
+        Header file to define all sorting algorithm signatures
+    sort_timer.c
+        Runner file with main method. Outputs recorded times to CSV.
 
     The only major data structures that we are using are the randomly-populated
     int arrays that our algorithms are sorting.
