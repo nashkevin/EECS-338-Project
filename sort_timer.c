@@ -31,7 +31,7 @@ int *random_array(int n) {
     return ret;
 }
 
-void time_to_file(char *filename, long (*f)(int[], int)){
+void time_to_file(char *filename, uint64_t (*f)(int[], int)){
     FILE *fp;
     filename = strcat(filename, ".csv");
     fp = fopen(filename, "w");
