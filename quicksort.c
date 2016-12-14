@@ -1,3 +1,4 @@
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -74,7 +75,7 @@ void *quicksort_thread(void *arguments) {
     pthread_exit(0);
 }
 
-uint64_t quicksort_parallel (int *a, int n) {
+uint64_t quicksort_parallel (int *A, int len) {
 
     pthread_t tid1, tid2;
     struct arg_struct args1, args2;
