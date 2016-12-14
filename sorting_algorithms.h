@@ -12,5 +12,6 @@ uint64_t merge_sort_parallel (int *a, int n);
 uint64_t selection_sort (int *a, int n);
 uint64_t selection_sort_parallel (int *a, int n);
 uint64_t quicksort (int *a, int n);
+uint64_t quicksort_parallel (int *a, int n);
 
 #endif

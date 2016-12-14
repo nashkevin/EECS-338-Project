@@ -76,5 +76,7 @@ int main(void) {
     time_to_file(selection_sort_parallel_filename, selection_sort_parallel);
     char quicksort_filename[] = "quicksort";
     time_to_file(quicksort_filename, quicksort);
+    char quicksort_parallel_filename[] = "quicksort_parallel";
+    time_to_file(quicksort_parallel_filename, quicksort_parallel);
     return 0;
 }
