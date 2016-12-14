@@ -1,4 +1,11 @@
-# CSV Output
+# Report files
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+*.zip
+
+# CSV output
 *.csv
 
 # Object files
@@ -7,7 +14,7 @@
 *.obj
 *.elf
 
-# Precompiled Headers
+# Precompiled headers
 *.gch
 *.pch
 

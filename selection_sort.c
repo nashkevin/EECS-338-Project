@@ -43,10 +43,9 @@ uint64_t selection_sort_parallel (int *a, int n) {
     for (i = 0; i < n; i++) {
         #pragma omp parallel for
         for (j = m = i; j < n; j++) {
-            #pragma omp critical {
-                if (a[j] < a[m]) {
-                    m = j;
-                }
+            #pragma omp critical
+            if (a[j] < a[m]) {
+                m = j;
             }
         }
         t = a[i];

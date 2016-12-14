@@ -45,13 +45,12 @@ uint64_t bubble_sort_parallel (int *a, int n) {
         s = 0;
         #pragma omp parallel for
         for (i = 1; i < n; i++) {
-            #pragma omp critical {
-                if (a[i] < a[i - 1]) {
-                    t = a[i];
-                    a[i] = a[i - 1];
-                    a[i - 1] = t;
-                    s = 1;
-                }
+            #pragma omp critical
+            if (a[i] < a[i - 1]) {
+                t = a[i];
+                a[i] = a[i - 1];
+                a[i - 1] = t;
+                s = 1;
             }
         }
     }

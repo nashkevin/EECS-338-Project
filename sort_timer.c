@@ -42,11 +42,11 @@ void time_to_file(char *filename, uint64_t (*f_regular)(int[], int), uint64_t (*
         int *array1 = random_array(n);
         int *array2 = random_array(n);
 
-        if (array) {
+        if (array1 && array2) {
             uint64_t t_regular = (*f_regular)(array1, n);
             uint64_t t_parallel = (*f_parallel)(array2, n);
 
-            fpringf(fp, "\n%d", n);
+            fprintf(fp, "\n%d", n);
 
             if (is_sorted(array1, n)) {
                 fprintf(fp,",%llu", t_regular);

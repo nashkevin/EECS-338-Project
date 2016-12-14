@@ -1,4 +1,3 @@
-
 [ FP Final Design Document ]
     Joel Kalos, Kevin Nash
     December 13, 2016
@@ -19,27 +18,26 @@ File Descriptions:
     sort_timer.c
         Runner file with main method. Outputs recorded times to CSV.
 
-    The only major data structures that we are using are the randomly-populated
-    int arrays that our algorithms are sorting.
+    The only major data structures we use are the randomly-populated integer
+    arrays that our algorithms are sorting.
 
-    We are creating an individual C file for each of the sorting algorithms
-    that we intend to implement. A runner file called sort_timer.c will run
-    parallel and non-parallel versions of each sorting algorithm. Every sort
-    method returns its runtime and sorts the array in memory, rather than
-    returning a sorted array. These runtimes are written to CSV files. There is
-    a uniquely named output file for each type of sort.
+    Each of the five sorting algorithms that we use has a separate C file.
+    Within each of these files there are, at a minimum, two sorting methods,
+    one of which does not take advantage of any parallel processing. Each
+    sorts its input array in-memory and returns the time taken to do so.
 
-    We also intend to plot these values in an aesthetically pleasing way, using
-    a custom made Python script or, time not permitting, using MS Excel.
+    sorting_algorithms.h gives sort_timer.c the necessary links to run the
+    sorting methods found in the individual sorting files. sort_timer.c writes
+    separate CSV files with three columns: N, Regular Sort, and Parallel Sort.
 
-    The single-threaded and multi-threaded versions of bubble sort are both
-    implemented in bubble_sort.c and they work as expected (multi-threading
-    is faster).
+    We plotted these values in a way that compares the differences between each
+    sorting algorithm implementation. These plots are included as images.
 
-    Sample output can be found in bubble_sort.csv and bubble_sort_parallel.csv.
+    Sample output is included for each algorithm in the following CSV files
+        bubble_sort.csv
+        insertion_sort.csv
+        merge_sort.csv
+        quicksort.csv
+        selection_sort.csv
 
-    In the future we also plan to include:
-        quicksort.c
-        mergesort.c
-        insertion_sort.c
-        selection_sort.c
+    The plots we generated draw from the above output data.
