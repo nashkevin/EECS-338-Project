@@ -1,11 +1,13 @@
 #ifndef SORTING_ALGORITHMS_H
 #define SORTING_ALGORITHMS_H
 
-long bubble_sort (int *a, int n);
-long bubble_sort_parallel (int *a, int n);
-long insertion_sort (int *a, int n);
-long insertion_sort_parallel (int *a, int n);
-long merge_sort (int *a, int n);
-long quicksort (int *a, int n);
+#include <stdint.h>
+
+uint64_t bubble_sort (int *a, int n);
+uint64_t bubble_sort_parallel (int *a, int n);
+uint64_t insertion_sort (int *a, int n);
+uint64_t insertion_sort_parallel (int *a, int n);
+uint64_t merge_sort (int *a, int n);
+uint64_t quicksort (int *a, int n);
 
 #endif
