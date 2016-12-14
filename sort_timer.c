@@ -31,26 +31,37 @@ int *random_array(int n) {
     return ret;
 }
 
-void time_to_file(char *filename, uint64_t (*f)(int[], int)){
+void time_to_file(char *filename, uint64_t (*f_regular)(int[], int), uint64_t (*f_parallel)(int[], int)){
     FILE *fp;
     filename = strcat(filename, ".csv");
     fp = fopen(filename, "w");
-    fprintf(fp, "N, Time(ns)");
+    fprintf(fp, "N, Regular Sort, Parallel Sort");
 
     int i, n;
     for (n = 1; n < 100000; n += 1000) {
-        int *array = random_array(n);
+        int *array1 = random_array(n);
+        int *array2 = random_array(n);
 
         if (array) {
-            uint64_t t = (*f)(array, n);
+            uint64_t t_regular = (*f_regular)(array1, n);
+            uint64_t t_parallel = (*f_parallel)(array2, n);
 
-            if (is_sorted(array, n)) {
-                fprintf(fp,"\n%d,%llu", n, t);
+            fpringf(fp, "\n%d", n);
+
+            if (is_sorted(array1, n)) {
+                fprintf(fp,",%llu", t_regular);
             } else {
-                fprintf(fp,"\n%d, NOTSORTED", n);
+                fprintf(fp,", NOTSORTED");
             }
 
-            free(array);
+            if (is_sorted(array2, n)) {
+                fprintf(fp,",%llu", t_parallel);
+            } else {
+                fprintf(fp,", NOTSORTED");
+            }
+
+            free(array1);
+            free(array2);
         }
     }
 
@@ -59,24 +70,14 @@ void time_to_file(char *filename, uint64_t (*f)(int[], int)){
 
 int main(void) {
     char bubble_sort_filename[] = "bubble_sort";
-    time_to_file(bubble_sort_filename, bubble_sort);
-    char bubble_sort_parallel_filename[] = "bubble_sort_parallel";
-    time_to_file(bubble_sort_parallel_filename, bubble_sort_parallel);
+    time_to_file(bubble_sort_filename, bubble_sort, bubble_sort_parallel);
     char insertion_sort_filename[] = "insertion_sort";
-    time_to_file(insertion_sort_filename, insertion_sort);
-    char insertion_sort_parallel_filename[] = "insertion_sort_parallel";
-    time_to_file(insertion_sort_parallel_filename, insertion_sort_parallel);
+    time_to_file(insertion_sort_filename, insertion_sort, insertion_sort_parallel);
     char merge_sort_filename[] = "merge_sort";
-    time_to_file(merge_sort_filename, merge_sort);
-    char merge_sort_parallel_filename[] = "merge_sort_parallel";
-    time_to_file(merge_sort_parallel_filename, merge_sort_parallel);
+    time_to_file(merge_sort_filename, merge_sort, merge_sort_parallel);
     char selection_sort_filename[] = "selection_sort";
-    time_to_file(selection_sort_filename, selection_sort);
-    char selection_sort_parallel_filename[] = "selection_sort_parallel";
-    time_to_file(selection_sort_parallel_filename, selection_sort_parallel);
+    time_to_file(selection_sort_filename, selection_sort, selection_sort_parallel);
     char quicksort_filename[] = "quicksort";
-    time_to_file(quicksort_filename, quicksort);
-    char quicksort_parallel_filename[] = "quicksort_parallel";
-    time_to_file(quicksort_parallel_filename, quicksort_parallel);
+    time_to_file(quicksort_filename, quicksort, quicksort_parallel);
     return 0;
 }
