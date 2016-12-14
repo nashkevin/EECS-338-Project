@@ -43,12 +43,13 @@ uint64_t insertion_sort_parallel (int *a, int n) {
     for (i = 1; i < n; ++i) {
         int tmp = a[i];
         j = i;
-        #pragma omp critical
-        while (j > 0 && tmp < a[j - 1]) {
-            a[j] = a[j - 1];
-            --j;
+        #pragma omp critical {
+            while (j > 0 && tmp < a[j - 1]) {
+                a[j] = a[j - 1];
+                --j;
+            }
+            a[j] = tmp;
         }
-        a[j] = tmp;
     }
 
     clock_gettime(CLOCK_MONOTONIC, &end);
