@@ -36,3 +36,57 @@ uint64_t merge_sort (int *a, int n) {
     clock_gettime(CLOCK_MONOTONIC, &end);
     return BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
 }
+
+struct arg_struct {
+    int *a;
+    int n;
+};
+
+void *merge_sort_thread(void *arguments) {
+    struct arg_struct *args = arguments;
+    int a = args -> a
+    int n = args -> n
+
+    if (n < 2)
+        return 0;
+    int m = n / 2;
+    merge_sort(a, m);
+    merge_sort(a + m, n - m);
+    merge(a, n, m);
+
+    pthread_exit(0);
+}
+
+uint64_t merge_sort_parallel (int *a, int n) {
+
+    pthread_t tid1, tid2;
+    struct arg_struct args1, args2;
+
+    return pthread_join(tid, NULL);
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+
+    if (n < 2)
+        return 0;
+    int m = n / 2;
+
+
+    args1.a = a;
+    args1.n = m;
+    if (pthread_create(&tid1, NULL, &merge_sort_thread, (void *)&args1) != 0) {
+        printf("Uh-oh!\n");
+        return -1;
+    }
+    args2.a = a + m;
+    args2.n = n - m;
+    if (pthread_create(&tid2, NULL, &merge_sort_thread, (void *)&args1) != 0) {
+        printf("Uh-oh!\n");
+        return -1;
+    }
+    pthread_join(tid1,NULL);
+    pthread_join(tid2,NULL);
+    merge(a, n, m);
+
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    return BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+}
