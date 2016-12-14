@@ -5,6 +5,8 @@
 
 #include "sorting_algorithms.h"
 
+#define BILLION 1000000000L
+
 void merge (int *a, int n, int m) {
     int i, j, k;
     int *x = malloc(n * sizeof (int));
@@ -20,9 +22,9 @@ void merge (int *a, int n, int m) {
     free(x);
 }
  
-long merge_sort (int *a, int n) {
-    time_t startTime, endTime;
-    startTime = clock();
+uint64_t merge_sort (int *a, int n) {
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC, &start);
 
     if (n < 2)
         return 0;
@@ -31,6 +33,6 @@ long merge_sort (int *a, int n) {
     merge_sort(a + m, n - m);
     merge(a, n, m);
 
-    endTime = clock();
-    return (long)((endTime - startTime) * 1000 * 1000 / CLOCKS_PER_SEC);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    return BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
 }

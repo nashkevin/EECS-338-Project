@@ -42,10 +42,10 @@ void time_to_file(char *filename, long (*f)(int[], int)){
         int *array = random_array(n);
 
         if (array) {
-            long t = (*f)(array, n);
+            uint64_t t = (*f)(array, n);
 
             if (is_sorted(array, n)) {
-                fprintf(fp,"\n%d,%d", n, t);
+                fprintf(fp,"\n%d,%llu", n, t);
             }
 
             free(array);

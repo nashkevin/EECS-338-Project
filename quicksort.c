@@ -4,10 +4,12 @@
 #include <omp.h>
 
 #include "sorting_algorithms.h"
+
+#define BILLION 1000000000L
  
-long quicksort(int *A, int len) {
-    time_t startTime, endTime;
-    startTime = clock();
+uint64_t quicksort(int *A, int len) {
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC, &start);
 
     if (len < 2) 
         return 0;
@@ -32,6 +34,6 @@ long quicksort(int *A, int len) {
     quicksort(A, i);
     quicksort(A + i, len - i);
 
-    endTime = clock();
-    return (long)((endTime - startTime) * 1000 * 1000 / CLOCKS_PER_SEC);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    return BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
 }
